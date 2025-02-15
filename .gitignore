@@ -1,0 +1,8 @@
+# ignorirovanie virtualnogo okrugenia
+venv/
+
+# ignorirovanie dr.filow
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
