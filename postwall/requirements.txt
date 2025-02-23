@@ -1,0 +1,6 @@
+# Spisok zavisimostej
+
+Flask
+Flask-SQLAlchemy
+Flask-Migrate
+mysqlclient
