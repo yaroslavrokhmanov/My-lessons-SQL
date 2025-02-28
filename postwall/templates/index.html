@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Стена для записей</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script src="{{ url_for('static', filename='script.js') }}"></script>    
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="/static/js/script.js"></script>
+    <!-- <script src="{{ url_for('static', filename='js/script.js') }}"></script> -->
 </head>
 <body>
     <div class="container">
         <h1>Stena dla zapisey</h1>
         <div id="posts">
             {% for post in posts %}
-            <div class="post">
+            <div class="post" data-post-id="{{ post.id }}">
                 <p>{{ post.content }}</p>
                 <button class="like-btn">👍</button>
                 <button class="dislike-btn">👎</button>
@@ -23,6 +25,6 @@
             {% endfor %}
         </div>
     </div>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
+

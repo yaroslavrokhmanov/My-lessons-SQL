@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #c92d2d;
+}
+ 
+.post {
+    background: #fff;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    cursor: pointer;
+    margin: 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.like-btn {
+    background-color: #4CAF50;
+    color: rgb(85, 46, 226);
+}
+
+.dislike-btn {
+    background-color: #f44336;
+    color: white;
+}
