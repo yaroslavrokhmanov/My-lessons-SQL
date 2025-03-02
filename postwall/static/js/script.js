@@ -3,13 +3,15 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.post').forEach(post => {
         const likeBtn = post.querySelector('.like-btn');
         const dislikeBtn = post.querySelector('.dislike-btn');
+        const likeCount = post.querySelector('.like-count');  
+        const dislikeCount = post.querySelector('.dislike-count'); 
 
         likeBtn.addEventListener('click', function () {
-            sendReaction(post.dataset.postId, 'like');
+            sendReaction(post.dataset.postId, 'like', likeCount, dislikeCount);
         });
 
         dislikeBtn.addEventListener('click', function () {
-            sendReaction(post.dataset.postId, 'dislike');
+            sendReaction(post.dataset.postId, 'dislike', likeCount, dislikeCount);
         });
     });
 
@@ -39,6 +41,10 @@ function sendReaction(postId, reaction) {
     .catch(error => console.error('Oszibka otprawki reakcii:', error));
 }
 
+
+
+
+
 // Zagruzka kommentariew
 function loadComments(postId, commentContainer) {
     fetch(`/post/${postId}/comments`)
@@ -53,3 +59,34 @@ function loadComments(postId, commentContainer) {
         })
         .catch(error => console.error('Oszibka zagruzki kommentariew:', error));
 }
+
+// Otprawka kommentariew
+function addComment(postId) {
+    const commentInput = document.querySelector(`#comment-input-${postId}`);
+    const commentText = commentInput.value.trim();
+
+    if (!commentText) {
+        console.error("Комментарий не может быть пустым");
+        return;
+    }
+
+    fetch(`/post/${postId}/comment`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ content: commentText })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            console.error("Ошибка:", data.error);
+        } else {
+            console.log("Комментарий добавлен:", data.comment);
+            loadComments(postId, document.querySelector(`#comments-${postId}`));
+            commentInput.value = ""; // oczistka polia posle dobawlenia
+        }
+    })
+    .catch(error => console.error("Oszibka otprawki kommentaria:", error));
+}
+
